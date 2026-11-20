@@ -12,6 +12,20 @@ const busca = document.querySelector("#busca");
 //         para cada curso cujo NOME contenha o filtro (use filter + map).
 //         Se nenhum curso passar, mostre um <li> com "Nada encontrado".
 //
-// TODO 2: chame render() ao carregar a página e a cada evento "input" na busca.
+function render(filtro = "") {
+  const cursosFiltrados = cursos.filter(curso =>
+    curso.nome.toLowerCase().includes(filtro.toLowerCase())
+  );
 
+  lista.innerHTML = cursosFiltrados.length > 0
+    ? cursosFiltrados.map(curso => `<li>${curso.nome}</li>`).join("")
+    : "<li>Nada encontrado</li>";
+}
+
+// TODO 2: chame render() ao carregar a página e a cada evento "input" na busca.
+render();
+
+busca.addEventListener("input", () => {
+  render(busca.value);
+});
 // escreva seu código aqui
